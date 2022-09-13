@@ -1,4 +1,3 @@
-use secrecy::ExposeSecret;
 use sqlx::PgPool;
 use std::net::TcpListener;
 use webtest::configuration::get_configuration;
@@ -18,8 +17,7 @@ async fn main() -> std::io::Result<()> {
     );
     let listener = TcpListener::bind(address)?;
 
-    let connection_pool =
-        PgPool::connect_lazy(configuration.database.connection_string().expose_secret())
-            .expect("Failed to connect to Postgres.");
+    let connection_pool = PgPool::connect_lazy_with(configuration.database.with_db());
+
     run(listener, connection_pool)?.await
 }
