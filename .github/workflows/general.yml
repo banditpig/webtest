@@ -35,6 +35,7 @@ jobs:
           command: fmt
           args: --all -- --check
 
+
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
