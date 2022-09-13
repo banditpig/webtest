@@ -1,5 +1,6 @@
 /target
 .gitignore
+!.github/workflows
 Cargo.lock
 # IntelliJ
 out/
