@@ -1,5 +1,7 @@
 use secrecy::ExposeSecret;
 use secrecy::Secret;
+use tracing::log;
+use tracing::log::log;
 
 #[derive(serde::Deserialize)]
 pub struct Settings {
@@ -76,6 +78,8 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
         .try_into()
         .expect("Failed to parse APP_ENVIRONMENT.");
     let environment_filename = format!("{}.yaml", environment.as_str());
+    log::info!("Config filename: {}", environment_filename);
+
     let settings = config::Config::builder()
         .add_source(config::File::from(
             configuration_directory.join("base.yaml"),

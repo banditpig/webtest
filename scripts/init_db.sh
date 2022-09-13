@@ -20,8 +20,10 @@ DB_NAME="${POSTGRES_DB:=newsletter}"
 DB_PORT="${POSTGRES_PORT:=5432}"
 if [[ -z "${SKIP_DOCKER}" ]]
 then
-  # Launch postgres using Docker
-  docker run \
+  # Launch postgres using Docker. note --net mkhnet
+  # created using docker network create mkhnet
+  # also mkh_postgres goes into the base.yaml
+  docker run --net mkhnet --name mkh_postgres\
     -e POSTGRES_USER=${DB_USER} \
     -e POSTGRES_PASSWORD=${DB_PASSWORD} \
     -e POSTGRES_DB=${DB_NAME} \
