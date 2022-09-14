@@ -1,0 +1,6 @@
+doctl apps create --spec spec.yaml
+doctl apps list
+
+DATABASE_URL= <xxx> sqlx migrate run
+(You will have to temporarily disable Trusted Sources
+to run the migrations from your local machine. )
